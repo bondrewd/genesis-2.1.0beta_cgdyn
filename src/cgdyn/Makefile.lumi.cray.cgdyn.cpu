@@ -22,7 +22,7 @@ PPDEFS += -DPACKAGE_NAME=\'\'
 PPDEFS += -DPACKAGE_VERSION=\'\'
 PPDEFS += -DVERSION
 #PPDEFS += -D_SINGLE
-#PPDEFS += -D_MIXED
+PPDEFS += -D_MIXED
 PPDEFS += -DUSE_CRAY
 PPFLAGS := -traditional-cpp $(PPDEFS)
 
@@ -42,8 +42,8 @@ FCFLAGS += -O2
 #-------------------------------------------------------------------------------
 CC := cc
 #CCDEFS := -D_SINGLE
-#CCDEFS := -D_MIXED
-CCDEFS := 
+CCDEFS := -D_MIXED
+#CCDEFS := 
 CCFLAGS := -g
 CCFLAGS += -O2
 CCFLAGS += $(CCDEFS)
