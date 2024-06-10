@@ -22,7 +22,7 @@ PPDEFS += -DPACKAGE_NAME=\'\'
 PPDEFS += -DPACKAGE_VERSION=\'\'
 PPDEFS += -DVERSION
 #PPDEFS += -D_SINGLE
-#PPDEFS += -D_MIXED
+PPDEFS += -D_MIXED
 PPFLAGS := -traditional-cpp $(PPDEFS)
 
 #-------------------------------------------------------------------------------
@@ -41,9 +41,9 @@ FCFLAGS += -O2
 # C compiler
 #-------------------------------------------------------------------------------
 CC := cc
-#CCDEFS += -D_SINGLE
-#CCDEFS += -D_MIXED
-CCDEFS += 
+#CCDEFS := -D_SINGLE
+CCDEFS := -D_MIXED
+#CCDEFS := 
 CCFLAGS := -g
 CCFLAGS += -O2
 CCFLAGS += $(CCDEFS)
@@ -853,11 +853,7 @@ cg_communicate.f90: cg_communicate.fpp
 	$(PP) $(PPFLAGS) $^ > $@
 
 #-------------------------------------------------------------------------------
-CG_COMMUNICATE_STR_OBJS := cg_boundary_str.o
-CG_COMMUNICATE_STR_OBJS += cg_enefunc_str.o
-CG_COMMUNICATE_STR_OBJS += cg_domain_str.o
-CG_COMMUNICATE_STR_OBJS += cg_communicate_str.o
-CG_COMMUNICATE_STR_OBJS += timers.o
+CG_COMMUNICATE_STR_OBJS := timers.o
 CG_COMMUNICATE_STR_OBJS += messages.o
 CG_COMMUNICATE_STR_OBJS += mpi_parallel.o
 CG_COMMUNICATE_STR_OBJS += constants.o

@@ -853,11 +853,7 @@ cg_communicate.f90: cg_communicate.fpp
 	$(PP) $(PPFLAGS) $^ > $@
 
 #-------------------------------------------------------------------------------
-CG_COMMUNICATE_STR_OBJS := cg_boundary_str.o
-CG_COMMUNICATE_STR_OBJS += cg_enefunc_str.o
-CG_COMMUNICATE_STR_OBJS += cg_domain_str.o
-CG_COMMUNICATE_STR_OBJS += cg_communicate_str.o
-CG_COMMUNICATE_STR_OBJS += timers.o
+CG_COMMUNICATE_STR_OBJS := timers.o
 CG_COMMUNICATE_STR_OBJS += messages.o
 CG_COMMUNICATE_STR_OBJS += mpi_parallel.o
 CG_COMMUNICATE_STR_OBJS += constants.o
