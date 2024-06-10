@@ -426,19 +426,19 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc) 
       call mpi_irecv(recv_size(1,iproc), 1, mpi_integer, ip,            &
-                     (my_city_rank+1)*nproc_city+ip, mpi_comm_city,     &
+                     ip, mpi_comm_city,     &
                      irequest(1,iproc), ierror)
       call mpi_irecv(recv_size(2,iproc), 1, mpi_integer, ip,            &
-                     2*(my_city_rank+1)*nproc_city+ip, mpi_comm_city,   &
+                     nproc_city+ip, mpi_comm_city,   &
                      irequest(2,iproc), ierror)
     end do
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_isend(send_size(1,iproc), 1, mpi_integer, ip,            &
-                     (ip+1)*nproc_city+my_city_rank, mpi_comm_city,     &
+                     my_city_rank, mpi_comm_city,     &
                      irequest(3,iproc), ierror)
       call mpi_isend(send_size(2,iproc), 1, mpi_integer, ip,            &
-                     2*(ip+1)*nproc_city+my_city_rank, mpi_comm_city,   &
+                     nproc_city+my_city_rank, mpi_comm_city,   &
                      irequest(4,iproc), ierror)
     end do
     do iproc = 1, num
@@ -589,13 +589,13 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(buf_recv(recv1(iproc)+1), 3*recv(iproc),           &
-                     mpi_wip_real, ip, (my_city_rank+1)*nproc_city+ip,  &
+                     mpi_wip_real, ip, ip,  &
                      mpi_comm_city, irequest1(iproc), ierror)
     end do
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_isend(buf_send(send1(iproc)+1), 3*send(iproc),           &
-                     mpi_wip_real, ip, (ip+1)*nproc_city+my_city_rank,  &
+                     mpi_wip_real, ip, my_city_rank,  &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -710,13 +710,13 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(buf_recv(recv1(iproc)+1), 3*recv(iproc),           &
-                     mpi_wip_real, ip, (my_city_rank+1)*nproc_city+ip,  &
+                     mpi_wip_real, ip, ip,  &
                      mpi_comm_city, irequest1(iproc), ierror)
     end do
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_isend(buf_send(send1(iproc)+1), 3*send(iproc),           &
-                     mpi_wip_real, ip, (ip+1)*nproc_city+my_city_rank,  &
+                     mpi_wip_real, ip, my_city_rank,  &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -846,10 +846,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(recv_size(1,iproc), 2, mpi_integer, ip,           &
-                     (my_city_rank+1)*nproc_city+ip, mpi_comm_city,    &
+                     ip, mpi_comm_city,    &
                      irequest(1,iproc), ierror)
       call mpi_isend(send_size(1,iproc), 2, mpi_integer, ip,           &
-                     (ip+1)*nproc_city+my_city_rank, mpi_comm_city,    &
+                     my_city_rank, mpi_comm_city,    &
                      irequest(2,iproc), ierror)
     end do
     do iproc = 1, num
@@ -869,10 +869,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(int_recv(recv1(1,iproc)+1), recv_size(1,iproc),  &
-                     mpi_integer, ip, (my_city_rank+1)*nproc_city+ip, &
+                     mpi_integer, ip, ip, &
                      mpi_comm_city, irequest(1,iproc), ierror)
       call mpi_isend(int_send(send1(1,iproc)+1), send_size(1,iproc),  &
-                     mpi_integer, ip, (ip+1)*nproc_city+my_city_rank, &
+                     mpi_integer, ip, my_city_rank, &
                      mpi_comm_city, irequest(2,iproc), ierror)
     end do
 
@@ -884,10 +884,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(buf_recv(recv1(2,iproc)+1), recv_size(2,iproc),  &
-                     mpi_wip_real, ip, (my_city_rank+1)*nproc_city+ip,&
+                     mpi_wip_real, ip, ip,&
                      mpi_comm_city, irequest(1,iproc), ierror)
       call mpi_isend(buf_send(send1(2,iproc)+1), send_size(2,iproc),  &
-                     mpi_wip_real, ip, (ip+1)*nproc_city+my_city_rank,&
+                     mpi_wip_real, ip, my_city_rank,&
                      mpi_comm_city, irequest(2,iproc), ierror)
     end do
     do iproc = 1, num
@@ -1038,10 +1038,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(recv_size(1,iproc), 2, mpi_integer, ip,           &
-                     (my_city_rank+1)*nproc_city+ip, mpi_comm_city,    &
+                     ip, mpi_comm_city,    &
                      irequest(1,iproc), ierror)
       call mpi_isend(send_size(1,iproc), 2, mpi_integer, ip,           &
-                     (ip+1)*nproc_city+my_city_rank, mpi_comm_city,    &
+                     my_city_rank, mpi_comm_city,    &
                      irequest(2,iproc), ierror)
     end do
     do iproc = 1, num
@@ -1061,10 +1061,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(int_recv(recv1(1,iproc)+1), recv_size(1,iproc),  &
-                     mpi_integer, ip, (my_city_rank+1)*nproc_city+ip, &
+                     mpi_integer, ip, ip, &
                      mpi_comm_city, irequest(1,iproc), ierror)
       call mpi_isend(int_send(send1(1,iproc)+1), send_size(1,iproc),  &
-                     mpi_integer, ip, (ip+1)*nproc_city+my_city_rank, &
+                     mpi_integer, ip, my_city_rank, &
                      mpi_comm_city, irequest(2,iproc), ierror)
     end do
 
@@ -1076,10 +1076,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(buf_recv(recv1(2,iproc)+1), recv_size(2,iproc),  &
-                     mpi_wip_real, ip, (my_city_rank+1)*nproc_city+ip,&
+                     mpi_wip_real, ip, ip,&
                      mpi_comm_city, irequest(1,iproc), ierror)
       call mpi_isend(buf_send(send1(2,iproc)+1), send_size(2,iproc),  &
-                     mpi_wip_real, ip, (ip+1)*nproc_city+my_city_rank,&
+                     mpi_wip_real, ip, my_city_rank,&
                      mpi_comm_city, irequest(2,iproc), ierror)
     end do
     do iproc = 1, num
@@ -1238,10 +1238,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(recv_size(1,iproc), 2*num_cellf(iproc),            &
-                     mpi_integer, ip, (my_city_rank+1)*nproc_city+ip,   &
+                     mpi_integer, ip, ip,   &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(send_size(1,iproc), 2*num_cellc(iproc),            &
-                     mpi_integer, ip, (ip+1)*nproc_city+my_city_rank,   &
+                     mpi_integer, ip, my_city_rank,   &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -1669,16 +1669,16 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(int_recv(recv1(1,iproc)+1), 4*recv(iproc),          &
-                     mpi_integer, ip, (my_city_rank+1)*nproc_city+ip,    &
+                     mpi_integer, ip, ip,    &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_irecv(buf_recv(recv1(2,iproc)+1), 8*recv(iproc),          &
-                     mpi_wip_real, ip, 2*(my_city_rank+1)*nproc_city+ip, &
+                     mpi_wip_real, ip, nproc_city+ip, &
                      mpi_comm_city, irequest2(iproc), ierror)
       call mpi_isend(int_send(send1(1,iproc)+1), 4*send(iproc),          &
-                     mpi_integer, ip, (ip+1)*nproc_city+my_city_rank,    &
+                     mpi_integer, ip, my_city_rank,    &
                      mpi_comm_city, irequest3(iproc), ierror)
       call mpi_isend(buf_send(send1(2,iproc)+1), 8*send(iproc),          &
-                     mpi_wip_real, ip, 2*(ip+1)*nproc_city+my_city_rank, &
+                     mpi_wip_real, ip, nproc_city+my_city_rank, &
                      mpi_comm_city, irequest4(iproc), ierror)
     end do
 
@@ -1811,10 +1811,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(recv_size(1,iproc), 2, mpi_integer, ip,             &
-                     (my_city_rank+1)*nproc_city+ip, mpi_comm_city,      &
+                     ip, mpi_comm_city,      &
                      irequest1(iproc), ierror)
       call mpi_isend(send_size(1,iproc), 2, mpi_integer, ip,             &
-                     (ip+1)*nproc_city+my_city_rank, mpi_comm_city,      &
+                     my_city_rank, mpi_comm_city,      &
                      irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -1834,10 +1834,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(int_recv(recv1(1,iproc)+1), recv_size(1,iproc),      &
-                     mpi_integer, ip, (my_city_rank+1)*nproc_city+ip,     &
+                     mpi_integer, ip, ip,     &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(int_send(send1(1,iproc)+1), send_size(1,iproc),      &
-                     mpi_integer, ip, (ip+1)*nproc_city+my_city_rank,     &
+                     mpi_integer, ip, my_city_rank,     &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -1850,10 +1850,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(buf_recv(recv1(2,iproc)+1), recv_size(2,iproc),      &
-                     mpi_wip_real, ip, (my_city_rank+1)*nproc_city+ip,    &
+                     mpi_wip_real, ip, ip,    &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(buf_send(send1(2,iproc)+1), send_size(2,iproc),      &
-                     mpi_wip_real, ip, (ip+1)*nproc_city+my_city_rank,    &
+                     mpi_wip_real, ip, my_city_rank,    &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2012,10 +2012,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(recv_size(1,iproc), 2, mpi_integer, ip,             &
-                     (my_city_rank+1)*nproc_city+ip, mpi_comm_city,      &
+                     ip, mpi_comm_city,      &
                      irequest1(iproc), ierror)
       call mpi_isend(send_size(1,iproc), 2, mpi_integer, ip,             &
-                     (ip+1)*nproc_city+my_city_rank, mpi_comm_city,      &
+                     my_city_rank, mpi_comm_city,      &
                      irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2035,10 +2035,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(int_recv(recv1(1,iproc)+1), recv_size(1,iproc),      &
-                     mpi_integer, ip, (my_city_rank+1)*nproc_city+ip,     &
+                     mpi_integer, ip, ip,     &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(int_send(send1(1,iproc)+1), send_size(1,iproc),      &
-                     mpi_integer, ip, (ip+1)*nproc_city+my_city_rank,     &
+                     mpi_integer, ip, my_city_rank,     &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2051,10 +2051,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(buf_recv(recv1(2,iproc)+1), recv_size(2,iproc),      &
-                     mpi_wip_real, ip, (my_city_rank+1)*nproc_city+ip,    &
+                     mpi_wip_real, ip, ip,    &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(buf_send(send1(2,iproc)+1), send_size(2,iproc),      &
-                     mpi_wip_real, ip, (ip+1)*nproc_city+my_city_rank,    &
+                     mpi_wip_real, ip, my_city_rank,    &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2233,10 +2233,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(recv_size(1,iproc), 2, mpi_integer, ip,             &
-                     (my_city_rank+1)*nproc_city+ip, mpi_comm_city,      &
+                     ip, mpi_comm_city,      &
                      irequest1(iproc), ierror)
       call mpi_isend(send_size(1,iproc), 2, mpi_integer, ip,             &
-                     (ip+1)*nproc_city+my_city_rank, mpi_comm_city,      &
+                     my_city_rank, mpi_comm_city,      &
                      irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2256,10 +2256,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(int_recv(recv1(1,iproc)+1), recv_size(1,iproc),      &
-                     mpi_integer, ip, (my_city_rank+1)*nproc_city+ip,     &
+                     mpi_integer, ip, ip,     &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(int_send(send1(1,iproc)+1), send_size(1,iproc),      &
-                     mpi_integer, ip, (ip+1)*nproc_city+my_city_rank,     &
+                     mpi_integer, ip, my_city_rank,     &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2272,10 +2272,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(buf_recv(recv1(2,iproc)+1), recv_size(2,iproc),      &
-                     mpi_wip_real, ip, (my_city_rank+1)*nproc_city+ip,    &
+                     mpi_wip_real, ip, ip,    &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(buf_send(send1(2,iproc)+1), send_size(2,iproc),      &
-                     mpi_wip_real, ip, (ip+1)*nproc_city+my_city_rank,    &
+                     mpi_wip_real, ip, my_city_rank,    &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2424,10 +2424,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(recv_size(1,iproc), 2, mpi_integer, ip,           &
-                     (my_city_rank+1)*nproc_city+ip, mpi_comm_city,    &
+                     ip, mpi_comm_city,    &
                      irequest1(iproc), ierror)
       call mpi_isend(send_size(1,iproc), 2, mpi_integer, ip,           &
-                     (ip+1)*nproc_city+my_city_rank, mpi_comm_city,    &
+                     my_city_rank, mpi_comm_city,    &
                      irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2447,10 +2447,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(int_recv(recv1(1,iproc)+1), recv_size(1,iproc),   &
-                     mpi_integer, ip, (my_city_rank+1)*nproc_city+ip,  & 
+                     mpi_integer, ip, ip,  & 
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(int_send(send1(1,iproc)+1), send_size(1,iproc),   &
-                     mpi_integer, ip, (ip+1)*nproc_city+my_city_rank,  &
+                     mpi_integer, ip, my_city_rank,  &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2463,10 +2463,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(buf_recv(recv1(2,iproc)+1), recv_size(2,iproc),   &
-                     mpi_wip_real, ip, (my_city_rank+1)*nproc_city+ip, &
+                     mpi_wip_real, ip, ip, &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(buf_send(send1(2,iproc)+1), send_size(2,iproc),   &
-                     mpi_wip_real, ip, (ip+1)*nproc_city+my_city_rank, &
+                     mpi_wip_real, ip, my_city_rank, &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2587,10 +2587,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(recv_size(1,iproc), 2, mpi_integer, ip,         &
-                     (my_city_rank+1)*nproc_city+ip, mpi_comm_city,  &
+                     ip, mpi_comm_city,  &
                      irequest1(iproc), ierror)
       call mpi_isend(send_size(1,iproc), 2, mpi_integer, ip,         &
-                     (ip+1)*nproc_city+my_city_rank, mpi_comm_city,  &
+                     my_city_rank, mpi_comm_city,  &
                      irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2610,10 +2610,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(int_recv(recv1(1,iproc)+1), recv_size(1,iproc),  &
-                     mpi_integer, ip, (my_city_rank+1)*nproc_city+ip, &
+                     mpi_integer, ip, ip, &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(int_send(send1(1,iproc)+1), send_size(1,iproc),  &
-                     mpi_integer, ip, (ip+1)*nproc_city+my_city_rank, &
+                     mpi_integer, ip, my_city_rank, &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2626,10 +2626,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(buf_recv(recv1(2,iproc)+1), recv_size(2,iproc),   &
-                     mpi_wip_real, ip, (my_city_rank+1)*nproc_city+ip, &
+                     mpi_wip_real, ip, ip, &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(buf_send(send1(2,iproc)+1), send_size(2,iproc),   &
-                     mpi_wip_real, ip, (ip+1)*nproc_city+my_city_rank, &
+                     mpi_wip_real, ip, my_city_rank, &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2749,10 +2749,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(recv_size(1,iproc), 2, mpi_integer, ip,          &
-                     (my_city_rank+1)*nproc_city+ip, mpi_comm_city,   &
+                     ip, mpi_comm_city,   &
                      irequest1(iproc), ierror)
       call mpi_isend(send_size(1,iproc), 2, mpi_integer, ip,          &
-                     (ip+1)*nproc_city+my_city_rank, mpi_comm_city,   &
+                     my_city_rank, mpi_comm_city,   &
                      irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2772,10 +2772,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(int_recv(recv1(1,iproc)+1), recv_size(1,iproc),  &
-                     mpi_integer, ip, (my_city_rank+1)*nproc_city+ip, &
+                     mpi_integer, ip, ip, &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(int_send(send1(1,iproc)+1), send_size(1,iproc),  &
-                     mpi_integer, ip, (ip+1)*nproc_city+my_city_rank, &
+                     mpi_integer, ip, my_city_rank, &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2788,10 +2788,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(buf_recv(recv1(2,iproc)+1), recv_size(2,iproc),   &
-                     mpi_wip_real, ip, (my_city_rank+1)*nproc_city+ip, &
+                     mpi_wip_real, ip, ip, &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(buf_send(send1(2,iproc)+1), send_size(2,iproc),   &
-                     mpi_wip_real, ip, (ip+1)*nproc_city+my_city_rank, &
+                     mpi_wip_real, ip, my_city_rank, &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2914,10 +2914,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(recv_size(1,iproc), 2, mpi_integer, ip,           &
-                     (my_city_rank+1)*nproc_city+ip, mpi_comm_city,    &
+                     ip, mpi_comm_city,    &
                      irequest1(iproc), ierror)
       call mpi_isend(send_size(1,iproc), 2, mpi_integer, ip,           &
-                     (ip+1)*nproc_city+my_city_rank, mpi_comm_city,    &
+                     my_city_rank, mpi_comm_city,    &
                      irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2937,10 +2937,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(int_recv(recv1(1,iproc)+1), recv_size(1,iproc),   &
-                     mpi_integer, ip, (my_city_rank+1)*nproc_city+ip,  &
+                     mpi_integer, ip, ip,  &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(int_send(send1(1,iproc)+1), send_size(1,iproc),   &
-                     mpi_integer, ip, (ip+1)*nproc_city+my_city_rank,  &
+                     mpi_integer, ip, my_city_rank,  &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -2953,10 +2953,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(buf_recv(recv1(2,iproc)+1), recv_size(2,iproc),   &
-                     mpi_wip_real, ip, (my_city_rank+1)*nproc_city+ip, &
+                     mpi_wip_real, ip, ip, &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(buf_send(send1(2,iproc)+1), send_size(2,iproc),   &
-                     mpi_wip_real, ip, (ip+1)*nproc_city+my_city_rank, &
+                     mpi_wip_real, ip, my_city_rank, &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -3089,10 +3089,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(recv_size(1,iproc), 2, mpi_integer, ip,           &
-                     (my_city_rank+1)*nproc_city+ip, mpi_comm_city,    &
+                     ip, mpi_comm_city,    &
                      irequest1(iproc), ierror)
       call mpi_isend(send_size(1,iproc), 2, mpi_integer, ip,           &
-                     (ip+1)*nproc_city+my_city_rank, mpi_comm_city,    &
+                     my_city_rank, mpi_comm_city,    &
                      irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -3112,10 +3112,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(int_recv(recv1(1,iproc)+1), recv_size(1,iproc),   &
-                     mpi_integer, ip, (my_city_rank+1)*nproc_city+ip,  &
+                     mpi_integer, ip, ip,  &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(int_send(send1(1,iproc)+1), send_size(1,iproc),   &
-                     mpi_integer, ip, (ip+1)*nproc_city+my_city_rank,  &
+                     mpi_integer, ip, my_city_rank,  &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
@@ -3128,10 +3128,10 @@ contains
     do iproc = 1, num
       ip = iproc_proc(iproc)
       call mpi_irecv(buf_recv(recv1(2,iproc)+1), recv_size(2,iproc),   &
-                     mpi_wip_real, ip, (my_city_rank+1)*nproc_city+ip, &
+                     mpi_wip_real, ip, ip, &
                      mpi_comm_city, irequest1(iproc), ierror)
       call mpi_isend(buf_send(send1(2,iproc)+1), send_size(2,iproc),   &
-                     mpi_wip_real, ip, (ip+1)*nproc_city+my_city_rank, &
+                     mpi_wip_real, ip, my_city_rank, &
                      mpi_comm_city, irequest2(iproc), ierror)
     end do
     do iproc = 1, num
